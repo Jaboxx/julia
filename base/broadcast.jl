@@ -845,7 +845,7 @@ _is_simd_safe(::Any, ::Any) = false
 _args_are_simd_safe() = true
 _args_are_simd_safe(::Any, args...) = false
 @inline _args_are_simd_safe(::Union{Array, Number}, args...) = _args_are_simd_safe(args...)
-@inline _args_are_simd_safe(bc::Broadcasted, args...) = simdable(bc.f) isa SIMDableFunction && _args_are_simd_safe(args...)
+@inline _args_are_simd_safe(bc::Broadcasted, args...) = Base.simdable(bc.f) isa Base.SIMDableFunction && _args_are_simd_safe(args...)
 
 # Performance optimization: for BitArray outputs, we cache the result
 # in a "small" Vector{Bool}, and then copy in chunks into the output
